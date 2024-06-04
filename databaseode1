@@ -1,0 +1,97 @@
+
+
+INSERT INTO laps (name, gen, sir, hasGraphicCard, price, image,maintenance) VALUES
+('Lenovo ThinkPad X1 Carbon', 'i7 10th Gen', '13.3"', 1, 1299.99, LOAD_FILE('F:\\React_Internships\\Lenovo_ThinkPad_X1_Carbon.jpg'),0),
+('HP Spectre x360', 'i7 11th Gen', '13.3"', 1, 1499.99, LOAD_FILE('F:\\React_Internships\\hp_spectra.jpg'),0),
+('Apple MacBook Pro', 'M1 Chip', '13.3"', 1, 1499.99, LOAD_FILE('F:\\React_Internships\\apple.jpg'),0),
+('ASUS ROG Zephyrus G14', 'Ryzen 9 5900HS', '14"', 1, 1799.99,LOAD_FILE('F:\\React_Internships\\asus.jpg'),0 ),
+('Microsoft Surface Laptop 4', 'Ryzen 7 4980U', '13.5"',  1, 1299.99,LOAD_FILE('F:\\React_Internships\\surface.jpg'),0),
+('Acer Swift 5', 'i7 11th Gen', '14"', 0, 1099.99,LOAD_FILE('F:\\React_Internships\\acer.jpg'),0 ),
+('Dell XPS 13', 'i7 11th Gen', '13.4"',  1, 1399.99, LOAD_FILE('F:\\React_Internships\\dell.jpg'),0),
+('Samsung Galaxy Book Pro', 'i7 11th Gen', '15.6"', 1, 1499.99, LOAD_FILE('F:\\React_Internships\\samsung.jpg'),0),
+('Google Pixelbook Go', 'Core i5', '13.3"',  0, 649.99, LOAD_FILE('F:\\React_Internships\\google.jpg'),0),
+('Razer Blade 15', 'i7 10th Gen', '15.6"',  1, 1999.99,LOAD_FILE('F:\\React_Internships\\raor.jpg'),0 ),
+('Lenovo ThinkPad X1 Carbon', 'i7 10th Gen', '13.3"', 1, 1299.99, LOAD_FILE('F:\\React_Internships\\Lenovo_ThinkPad_X1_Carbon.jpg'),0);
+
+
+CREATE TABLE `laps` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) ,
+    gen VARCHAR(50),
+    sir VARCHAR(50),
+    hasGraphicCard TINYINT(1) DEFAULT 0,
+    price DECIMAL(10,2),
+    image BLOB,
+    maintenance TINYINT(1)
+);
+
+ALTER TABLE laps
+ADD CONSTRAINT unique_name UNIQUE (name);
+
+
+CREATE TABLE stock (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    purchase_date DATE,
+    num_of_stocks INT,
+    lap_name VARCHAR(255),
+    FOREIGN KEY (lap_name) REFERENCES laps(name),
+    total_price DECIMAL(10, 2),
+
+);
+ALTER TABLE stock ADD COLUMN PPU DECIMAL(10, 2);
+UPDATE stock SET PPU = total_price / num_of_stocks;
+//   PPU  priceperunit
+
+ALTER TABLE stock
+MODIFY COLUMN PPU DECIMAL(10, 2) DEFAULT 0;
+================================================================================
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(25) NOT NULL UNIQUE,
+    email VARCHAR(25) NOT NULL UNIQUE,
+    password VARCHAR(25) NOT NULL,
+    profile_image BLOB
+);
+// ALTER TABLE user type "admin""staff""sale""user"
+ALTER TABLE users MODIFY profile_image BLOB DEFAULT NULL;
+
+ALTER TABLE users
+ADD role TEXT NOT NULL DEFAULT 'user';
+
+INSERT INTO users (username, email, password, role,profile_image) VALUES 
+('user1', 'user1@example.com', 'client', 'client',LOAD_FILE('F://client.png')),
+ ('user2', 'user2@example.com', 'it-staff', 'it-staff',LOAD_FILE('F://itstaff.png')), 
+ ('user3', 'user3@example.com', 'admin', 'admin',LOAD_FILE('F://admin.jpg')), 
+ ('user4', 'user4@example.com', 'sale-staff', 'sale-staff',LOAD_FILE('F://sale.jpg'));
+=====================================================================================
+
+
+
+CREATE TABLE Orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    productName VARCHAR(255),
+    numOfProductOrders INT,
+    priceOfOrder DECIMAL(10, 2),
+    address TEXT,
+    accountNumber BIGINT,
+    receiptImage BLOB,
+    itStaffApproved TINYINT(1),
+    saleStaffApproved TINYINT(1),
+    FOREIGN KEY (username) REFERENCES users(username),
+    FOREIGN KEY (productName) REFERENCES laps(name)
+);
+
+
+ALTER TABLE orders
+ADD COLUMN date_of_selling DATE,
+ADD COLUMN date_of_order DATE;
+
+ALTER TABLE orders MODIFY COLUMN date_of_selling DATE DEFAULT NULL;
+
+
+=========================================================================================================
+
+
+

@@ -1,0 +1,11 @@
+front end command 
+cd inventory 
+npm rundev
+
+
+cd backend
+npm 
+
+
+
+xamp ache mysql
