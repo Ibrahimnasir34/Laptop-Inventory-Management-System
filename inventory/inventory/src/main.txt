@@ -1,0 +1,61 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+import AuthProvider from './AuthProvider';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter>
+   <AuthProvider>
+      <Routes>
+<Route path="/*" element={<App/>} />
+
+      </Routes>
+  
+    </AuthProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
+)
+
+                                       App
+
+function App()
+{  
+<Routes>
+<Route path='/' element={<Layout/>}>
+{/* public routes */}
+<Route path="login" element={<login/>} />
+<Route path="register" element={<register/>} />
+<Route path="linkpage" element={<Linkpage/>} />
+<Route path="authorixed" element={<Authoried/>} />
+
+<Route path="/" element={<Home/>} />
+<Route path="editor" element={<Editor/>} />
+<Route path="admin" element={<Admin/>} />
+<Route path="loungue" element={<Loungue/>} />
+{/* catch all*/}
+<Route path="*" element={<Missing/>} />
+</Route>   
+</Routes>
+}
+export default App
+
+                                               Layout.jsx
+import { Outlet } from "react-router-dom"
+const Layout = () =>{
+  <main classname="App"> <Outlet /> </main>
+
+}
+
+                             inside hooks directorty useAut.jsx
+import { useContext } from "react";
+import AuthContext from "../context/AuthProvider";
+
+const useAuth = () =>{
+
+return useContext(AuthContext);
+
+}
+export default useAuth;

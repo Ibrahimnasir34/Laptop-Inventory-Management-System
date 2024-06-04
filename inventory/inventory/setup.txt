@@ -1,0 +1,149 @@
+cd inventory
+npm vite@latest inventory
+npm install 
+npm run dev
+npm i react-router-dom
+
+
+
+
+
+PS F:\React_Internships\InventoryIbrah> cd backend
+PS F:\React_Internships\InventoryIbrah\backend> npm init -y
+
+npm install express cors mysql nodemon
+
+npm i cors
+
+
+cd inventory  ///  npm run dev     ///   frontend
+F:\React_Internships\InventoryIbrah\backend>   cd backend npm start   //backend
+
+
+ F:\React_Internships\InventoryIbrah\inventory> npm i react-router-dom
+npm i react-router-dom  
+npm install react-icons --save
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm install flowbite flowbite-react
+npm install flowbite --save
+
+npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+npm install @fortawesome/fontawesome-svg-core
+
+npx tailwindcss init -p
+
+
+
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const imageToBlob = async (file) => {
+    return new Promise((resolve, reject) => {
+      // Step 1: Read image file
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Step 2: Convert data URL to Blob
+        const base64Data = reader.result.split(',')[1];
+        const byteCharacters = atob(base64Data);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: file.type });
+        // Step 4: Return Blob
+        resolve(blob);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const blob = await imageToBlob(file);
+      console.log('Blob data:', blob);
+      setBook((prev) => ({ ...prev, image: blob }));
+    } catch (error) {
+      console.error('Error converting image to Blob:', error);
+    }
+  };
+
+

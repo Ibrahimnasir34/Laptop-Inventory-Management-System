@@ -1,0 +1,52 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+
+/* In your CSS or SCSS file */
+
+:root {
+  --font-family-1: 'Poppins', sans-serif;
+  --font-color-dark-blue: #130066; 
+  --font-color-dark-gray: #1c1c1de8;
+  --font-color-dark-black: #170f2e;
+
+  
+  --ffont: 16px;
+  --ffont3: 72px; 
+  --folight: 300;
+  --foregular: 400;
+  --fomedium: 600;
+}
+
+/* Apply font family to body */
+body {
+  font-family: 'Public Sans', sans-serif;
+
+}
+
+/* Define text sizes */
+.text-xs {
+  font-size: 0.75rem; /* 12px */
+}
+
+.text-sm {
+  font-size: 0.875rem; /* 14px */
+}
+
+.text-base {
+  font-size: 1rem; /* 16px */
+}
+
+.text-lg {
+  font-size: 1.125rem; /* 18px */
+}
+
+.text-xl {
+  font-size: 1.25rem; /* 20px */
+}
+
+
